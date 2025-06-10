@@ -31,8 +31,8 @@ public class LeftLever : MonoBehaviour
         leftThumbstickAction.performed += OnThumbstickChanged;
         leftThumbstickAction.canceled += OnThumbstickChanged;
         leftThumbstickAction.Disable();
-        leftThumbstickAction.Enable();
-        isGrabbed = true;
+        // leftThumbstickAction.Enable();
+        // isGrabbed = true;
     }
 
     private void OnDestroy()

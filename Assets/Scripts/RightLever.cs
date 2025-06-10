@@ -51,7 +51,7 @@ public class RightLever : MonoBehaviour
         rightThumbstickAction.performed += OnThumbstickChanged;
         rightThumbstickAction.canceled += OnThumbstickChanged;
 
-        isGrabbed = true; //Test purpose
+        // isGrabbed = true; //Test purpose
         rightThumbstickAction.Enable();
     }
 
