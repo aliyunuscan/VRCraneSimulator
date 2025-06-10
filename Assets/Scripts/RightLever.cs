@@ -27,6 +27,18 @@ public class RightLever : MonoBehaviour
         grabInteractable.selectExited.AddListener(OnReleased);
     }
 
+    private void Start()
+    {
+        rightThumbstickAction = InputManager.Actions.XRIRight.Thumbstick;
+
+        rightThumbstickAction.performed += OnThumbstickChanged;
+        rightThumbstickAction.canceled += OnThumbstickChanged;
+        rightThumbstickAction.Enable();
+        rightThumbstickAction.Disable();
+        
+        // isGrabbed = true;
+    }
+
     private void OnGrabbed(SelectEnterEventArgs enterArgs)
     {
         isGrabbed = true;
@@ -46,7 +58,6 @@ public class RightLever : MonoBehaviour
 
     private void OnEnable()
     {
-        rightThumbstickAction = InputManager.Actions.XRIRight.Thumbstick;
 
         rightThumbstickAction.performed += OnThumbstickChanged;
         rightThumbstickAction.canceled += OnThumbstickChanged;
