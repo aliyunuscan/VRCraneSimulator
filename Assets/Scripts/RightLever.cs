@@ -11,9 +11,8 @@ public class RightLever : MonoBehaviour
     [Header("CraneController Reference")]
     public CraneController CraneController;
 
-    [Header("Right Contr. Thumstick Action")] //XRI Default Input Actions → XRI RightHand → Thumbstick
+    [Header("Right Contr. Thumstick Action")]
     private InputAction rightThumbstickAction;
-
     private XRGrabInteractable grabInteractable;
     private float deadzone = 0.1f;
     private Coroutine holdCoroutine = null;
@@ -27,16 +26,19 @@ public class RightLever : MonoBehaviour
         grabInteractable.selectExited.AddListener(OnReleased);
     }
 
-    private void Start()
+    private IEnumerator  Start()
     {
+        while (InputManager.Actions == null)
+        {
+            yield return null;
+        }
+
         rightThumbstickAction = InputManager.Actions.XRIRight.Thumbstick;
 
         rightThumbstickAction.performed += OnThumbstickChanged;
         rightThumbstickAction.canceled += OnThumbstickChanged;
         rightThumbstickAction.Enable();
         rightThumbstickAction.Disable();
-        
-        // isGrabbed = true;
     }
 
     private void OnGrabbed(SelectEnterEventArgs enterArgs)
@@ -58,6 +60,7 @@ public class RightLever : MonoBehaviour
 
     private void OnEnable()
     {
+        if (InputManager.Actions == null) return;
 
         rightThumbstickAction.performed += OnThumbstickChanged;
         rightThumbstickAction.canceled += OnThumbstickChanged;

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+    public static InputManager Instance { get; private set; }
     public static XRIDefaultInputActions Actions { get; private set; }
 
     private void Awake()
