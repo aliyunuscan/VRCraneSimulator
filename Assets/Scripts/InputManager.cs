@@ -2,20 +2,20 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    public static InputManager Instance { get; private set; }
-    public static XRIDefaultInputActions Actions { get; private set; }
+    public XRIDefaultInputActions Actions { get; private set; }
 
     private void Awake()
     {
         Actions = new XRIDefaultInputActions();
     }
 
-    private void OnDestroy()
+    void OnEnable()
     {
-        if (Actions != null)
-        {
-            Actions.Disable();
-            Actions = null;
-        }
+        Actions.Enable();
+    }
+
+    void OnDisable()
+    {
+        Actions.Disable();   // 
     }
 }

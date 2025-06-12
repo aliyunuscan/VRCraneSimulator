@@ -26,18 +26,14 @@ public class RightLever : MonoBehaviour
         grabInteractable.selectExited.AddListener(OnReleased);
     }
 
-    private IEnumerator  Start()
+    private void  Start()
     {
-        while (InputManager.Actions == null)
-        {
-            yield return null;
-        }
-
-        rightThumbstickAction = InputManager.Actions.XRIRight.Thumbstick;
-
+        rightThumbstickAction = GetComponentInParent<InputManager>().Actions.XRIRight.Thumbstick;
         rightThumbstickAction.performed += OnThumbstickChanged;
         rightThumbstickAction.canceled += OnThumbstickChanged;
+
         rightThumbstickAction.Enable();
+
         rightThumbstickAction.Disable();
     }
 
@@ -60,12 +56,10 @@ public class RightLever : MonoBehaviour
 
     private void OnEnable()
     {
-        if (InputManager.Actions == null) return;
-
+        if (rightThumbstickAction == null) return;
         rightThumbstickAction.performed += OnThumbstickChanged;
         rightThumbstickAction.canceled += OnThumbstickChanged;
 
-        // isGrabbed = true; //Test purpose
         rightThumbstickAction.Enable();
     }
 
@@ -102,12 +96,6 @@ public class RightLever : MonoBehaviour
     {
         while (true)
         {
-            //if (!isGrabbed || rightThumbstickAction == null)
-            //{
-            //    holdCoroutine = null;
-            //    yield break;
-            //}
-
             float currentY = rightThumbstickAction.ReadValue<Vector2>().y;
 
             if (Mathf.Abs(currentY) <= deadzone)

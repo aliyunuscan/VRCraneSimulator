@@ -24,34 +24,14 @@ public class LeftLever : MonoBehaviour
         grabInteractable.selectExited.AddListener(OnReleased);
     }
 
-    private void OnEnable()
+    private void Start()
     {
-        if (InputManager.Actions == null) return;
-
+        leftThumbstickAction = GetComponentInParent<InputManager>().Actions.XRIRight.Thumbstick;
         leftThumbstickAction.performed += OnThumbstickChanged;
         leftThumbstickAction.canceled += OnThumbstickChanged;
 
         leftThumbstickAction.Enable();
-    }
 
-    private IEnumerator Start()
-    {
-        while (InputManager.Actions == null)
-        {
-            yield return null;
-        }
-
-        leftThumbstickAction = InputManager.Actions.XRILeft.Thumbstick;
-
-        leftThumbstickAction.performed += OnThumbstickChanged;
-        leftThumbstickAction.canceled += OnThumbstickChanged;
-        leftThumbstickAction.Disable();
-    }
-
-    private void OnDisable()
-    {
-        leftThumbstickAction.performed -= OnThumbstickChanged;
-        leftThumbstickAction.canceled -= OnThumbstickChanged;
         leftThumbstickAction.Disable();
     }
 
@@ -62,6 +42,22 @@ public class LeftLever : MonoBehaviour
 
         leftThumbstickAction.performed -= OnThumbstickChanged;
         leftThumbstickAction.canceled -= OnThumbstickChanged;
+    }
+
+    private void OnEnable()
+    {
+        if (leftThumbstickAction == null) return;
+        leftThumbstickAction.performed += OnThumbstickChanged;
+        leftThumbstickAction.canceled += OnThumbstickChanged;
+
+        leftThumbstickAction.Enable();
+    }
+
+    private void OnDisable()
+    {
+        leftThumbstickAction.performed -= OnThumbstickChanged;
+        leftThumbstickAction.canceled -= OnThumbstickChanged;
+        leftThumbstickAction.Disable();
     }
 
     private void OnGrabbed(SelectEnterEventArgs args)
