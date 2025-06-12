@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class InputManager : MonoBehaviour
 
     void OnDisable()
     {
-        Actions.Disable();   // 
+        Actions.Disable(); 
     }
+
+    
 }

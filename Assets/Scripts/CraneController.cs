@@ -5,20 +5,21 @@ using UnityEngine.SocialPlatforms;
 public class CraneController : MonoBehaviour
 {
     public Transform hook;
-    public float hookSpeed = 2f;
-    public float ropeLength = 5f;
-    // public float hookMinY = 0f;
-    // public float hookMaxY = 5f;
-    public float carYSize;
+    public float hookSpeed = 1f;
     [SerializeField] private float hookFollowSpeed = 5f;
     public Transform car;
     public float carSpeed = 5f;
     public Transform boomStartCorner;
     public Transform boomEndCorner;
-    public SpringJoint hookSJ;
+    private Rope rope;
     public Transform craneRotationPivot;
     public float rotationSpeed=100f;
     public float rotationSmoothness = 5f;
+
+    void Start()
+    {
+        rope = FindAnyObjectByType<Rope>();
+    }
 
     public void MoveHookY(float input)
     {
@@ -30,16 +31,10 @@ public class CraneController : MonoBehaviour
 
         float delta = input * hookSpeed * Time.deltaTime;
 
-        if (hookSJ.maxDistance < 15.0f && hookSJ.maxDistance >= 0.0f) hookSJ.maxDistance += delta;
-        else if ((15.0f - hookSJ.maxDistance) < hookSJ.maxDistance) hookSJ.maxDistance = 14.9f; 
-        else hookSJ.maxDistance = 0.0f; 
-        
-        // Vector3 localPos = hook.localPosition;
-        // float newY = Mathf.Clamp(localPos.y + delta, car.localPosition.y - ropeLength, car.localPosition.y - carYSize);
+        if (rope.maxLength < 15.0f && rope.maxLength >= 0.0f) rope.maxLength += delta;
+        else if ((15.0f - rope.maxLength) < rope.maxLength) rope.maxLength = 14.9f;
+        else rope.maxLength = 0.0f;
 
-        // Debug.Log($"Moving hook: Input={input} Delta={delta} NewY={newY}");
-
-        // hook.localPosition = new Vector3(localPos.x, newY, localPos.z);
     }
 
 

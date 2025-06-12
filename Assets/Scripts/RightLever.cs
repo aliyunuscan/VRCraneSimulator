@@ -11,9 +11,13 @@ public class RightLever : MonoBehaviour
     [Header("CraneController Reference")]
     public CraneController CraneController;
 
-    [Header("Right Contr. Thumstick Action")]
+    [Header("InputAction References")]
     private InputAction rightThumbstickAction;
     private XRGrabInteractable grabInteractable;
+    private InputManager inputManager;
+    [Header("Restrictor")]
+    private PlayerRestrictor playerRestrictor;
+    [Header("Other Variables")]
     private float deadzone = 0.1f;
     private Coroutine holdCoroutine = null;
     private bool isGrabbed = false;
@@ -21,14 +25,17 @@ public class RightLever : MonoBehaviour
     private void Awake()
     {
         grabInteractable = GetComponent<XRGrabInteractable>();
-        
+        playerRestrictor = FindAnyObjectByType<PlayerRestrictor>();
+
         grabInteractable.selectEntered.AddListener(OnGrabbed);
         grabInteractable.selectExited.AddListener(OnReleased);
     }
 
     private void  Start()
     {
-        rightThumbstickAction = GetComponentInParent<InputManager>().Actions.XRIRight.Thumbstick;
+        inputManager = GetComponentInParent<InputManager>();
+
+        rightThumbstickAction = inputManager.Actions.XRIRight.Thumbstick;
         rightThumbstickAction.performed += OnThumbstickChanged;
         rightThumbstickAction.canceled += OnThumbstickChanged;
 
@@ -41,18 +48,27 @@ public class RightLever : MonoBehaviour
     {
         isGrabbed = true;
         rightThumbstickAction.Enable();
+
+        playerRestrictor.DisableLocomotion();
+        playerRestrictor.DisableTeleportInteractors();
+        //playerRestrictor.DisableNearFarInteractor();
     }
     private void OnReleased(SelectExitEventArgs exitArgs)
     {
         isGrabbed = false;
-        if(holdCoroutine != null)
+        if (holdCoroutine != null)
         {
             StopCoroutine(holdCoroutine);
             holdCoroutine = null;
         }
 
         rightThumbstickAction.Disable();
+
+        playerRestrictor.EnableLocomotion();
+        playerRestrictor.EnableTeleportInteractors();
+        //playerRestrictor.EnableNearFarInteractor();
     }
+    
 
     private void OnEnable()
     {

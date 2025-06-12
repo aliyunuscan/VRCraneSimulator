@@ -10,8 +10,13 @@ public class LeftLever : MonoBehaviour
     [Header("CraneController Reference")]
     public CraneController CraneController;
 
+    [Header("InputAction References")]
     private InputAction leftThumbstickAction;
     private XRGrabInteractable grabInteractable;
+    private InputManager inputManager;
+    [Header("Restrictor")]
+    private PlayerRestrictor playerRestrictor;
+    [Header("Other Variables")]
     private float deadzone = 0.1f;
     private Coroutine holdCoroutine = null;
     private bool isGrabbed = false;
@@ -19,6 +24,7 @@ public class LeftLever : MonoBehaviour
     private void Awake()
     {
         grabInteractable = GetComponent<XRGrabInteractable>();
+        playerRestrictor = FindAnyObjectByType<PlayerRestrictor>();
 
         grabInteractable.selectEntered.AddListener(OnGrabbed);
         grabInteractable.selectExited.AddListener(OnReleased);
@@ -26,7 +32,8 @@ public class LeftLever : MonoBehaviour
 
     private void Start()
     {
-        leftThumbstickAction = GetComponentInParent<InputManager>().Actions.XRIRight.Thumbstick;
+        inputManager = GetComponentInParent<InputManager>();
+        leftThumbstickAction = inputManager.Actions.XRILeft.Thumbstick;
         leftThumbstickAction.performed += OnThumbstickChanged;
         leftThumbstickAction.canceled += OnThumbstickChanged;
 
@@ -64,6 +71,10 @@ public class LeftLever : MonoBehaviour
     {
         isGrabbed = true;
         leftThumbstickAction.Enable();
+
+        playerRestrictor.DisableLocomotion();
+        playerRestrictor.DisableTeleportInteractors();
+        //playerRestrictor.DisableNearFarInteractor();
     }
 
     private void OnReleased(SelectExitEventArgs args)
@@ -77,6 +88,10 @@ public class LeftLever : MonoBehaviour
         }
 
         leftThumbstickAction?.Disable();
+
+        playerRestrictor.EnableLocomotion();
+        playerRestrictor.EnableTeleportInteractors();
+        //playerRestrictor.EnableNearFarInteractor();
     }
 
     private void OnThumbstickChanged(InputAction.CallbackContext context)
