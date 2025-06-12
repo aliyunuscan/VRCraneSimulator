@@ -92,3 +92,5 @@ Assets/UniversalRP/Textures/
 Assets/**/README*.*
 Assets/**/ExampleAssets/
 Assets/VRTemplateAssets/
+Assets/VRTemplateAssets/XR Interaction Toolkit/3.1.2/StarterAssets/Models/
+Assets/Samples/XR Interaction Toolkit/3.1.1/Hands Interaction Demo/HandsDemoSceneAssets/Models/
