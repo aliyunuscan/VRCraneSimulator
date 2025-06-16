@@ -31,8 +31,8 @@ public class CraneController : MonoBehaviour
 
         float delta = input * hookSpeed * Time.deltaTime;
 
-        if (rope.maxLength < 15.0f && rope.maxLength >= 0.0f) rope.maxLength += delta;
-        else if ((15.0f - rope.maxLength) < rope.maxLength) rope.maxLength = 14.9f;
+        if (rope.maxLength < 23.0f && rope.maxLength >= 0.0f) rope.maxLength += delta;
+        else if ((23.0f - rope.maxLength) < rope.maxLength) rope.maxLength = 22.9f;
         else rope.maxLength = 0.0f;
 
     }
