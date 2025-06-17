@@ -1,15 +1,10 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
 [RequireComponent(typeof(Collider))]
 public class TargetArea : MonoBehaviour
 {
-    [Tooltip("Yük alanına girip kancadan ayrıldıktan sonra başlayacak süre (s)")]
-    public float countdownTime = 5f;
-
-    [Tooltip("Yük başarılı yerleştirildiğinde tetiklenecek event")]
-    public UnityEvent OnLevelComplete;
+    public string requiredColor; // e.g., "Red", "Blue", "Green"
+    public float countdownTime = 2f;
 
     private Coroutine countdownRoutine;
     private Load currentLoad;
@@ -24,73 +19,34 @@ public class TargetArea : MonoBehaviour
         if (!other.CompareTag("Load")) return;
 
         var load = other.GetComponent<Load>();
-        if (load == null) return;
+        if (load == null || load.containerColor != requiredColor) return;
 
-        if (!load.IsHooked)
-        {
-            currentLoad = load;
-            countdownRoutine = StartCoroutine(CountdownAndComplete());
-        }
-
-        load.OnHooked += HandleLoadHooked;
-        load.OnUnhooked += HandleLoadUnhooked;
+        currentLoad = load;
+        countdownRoutine = StartCoroutine(CountdownAndNotify());
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!other.CompareTag("Load")) return;
-
-        if (other.GetComponent<Load>() == currentLoad)
-            CancelCountdown();
-
-        var load = other.GetComponent<Load>();
-        if (load != null)
+        if (currentLoad != null && other.GetComponent<Load>() == currentLoad)
         {
-            load.OnHooked -= HandleLoadHooked;
-            load.OnUnhooked -= HandleLoadUnhooked;
+            StopCoroutine(countdownRoutine);
+            currentLoad = null;
         }
     }
 
-    private IEnumerator CountdownAndComplete()
+    private System.Collections.IEnumerator CountdownAndNotify()
     {
         float t = countdownTime;
+
         while (t > 0f)
         {
-            if (currentLoad == null || currentLoad.IsHooked)
+            if (currentLoad == null)
                 yield break;
-
-            Debug.Log($"[TargetPointTrigger] Countdown: {t:F2} seconds remaining");
 
             t -= Time.deltaTime;
             yield return null;
         }
 
-        OnLevelComplete?.Invoke();
-    }
-
-    private void HandleLoadHooked()
-    {
-        CancelCountdown();
-    }
-
-    private void HandleLoadUnhooked()
-    {
-        if (currentLoad != null)
-            countdownRoutine = StartCoroutine(CountdownAndComplete());
-    }
-
-    private void CancelCountdown()
-    {
-        if (countdownRoutine != null)
-        {
-            StopCoroutine(countdownRoutine);
-            countdownRoutine = null;
-        }
-        currentLoad = null;
-    }
-
-    public void LevelComplete()
-    {
-        Debug.Log("Level Complete");
+        TargetManager.Instance.NotifyTargetFilled(this);
     }
 }
