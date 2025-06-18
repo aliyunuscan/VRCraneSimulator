@@ -11,30 +11,28 @@ public class CraneController : MonoBehaviour
     public float carSpeed = 5f;
     public Transform boomStartCorner;
     public Transform boomEndCorner;
-    private Rope rope;
+    public Rope hookRope;
     public Transform craneRotationPivot;
     public float rotationSpeed=100f;
     public float rotationSmoothness = 5f;
 
     void Start()
     {
-        rope = FindAnyObjectByType<Rope>();
+        //rope = FindAnyObjectByType<Rope>();
     }
 
     public void MoveHookY(float input)
     {
-        if (hook == null)
+        if (hookRope == null)
         {
             Debug.LogWarning("Hook reference is missing!");
             return;
         }
 
         float delta = input * hookSpeed * Time.deltaTime;
+        hookRope.maxLength += delta;
 
-        if (rope.maxLength < 23.0f && rope.maxLength >= 0.0f) rope.maxLength += delta;
-        else if ((23.0f - rope.maxLength) < rope.maxLength) rope.maxLength = 22.9f;
-        else rope.maxLength = 0.0f;
-
+        hookRope.maxLength = Mathf.Clamp(hookRope.maxLength, 0.0f, 23.0f);
     }
 
 

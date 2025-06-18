@@ -28,6 +28,7 @@ public class DialogueManager : MonoBehaviour
         {
             dialogueText.text = ""; // End of dialogue
             continueButton.gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 
