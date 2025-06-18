@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TargetManager : MonoBehaviour
 {
     public static TargetManager Instance;
+    public string NextScene;
 
     public TargetArea[] targetAreas;
     private bool[] areaCompleted;
@@ -39,6 +41,6 @@ public class TargetManager : MonoBehaviour
     private void EndLevel()
     {
         Debug.Log("✅ All containers placed. Level Complete!");
-        // Add event or load next level here
+        SceneManager.LoadScene(NextScene);
     }
 }
