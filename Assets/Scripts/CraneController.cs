@@ -13,12 +13,23 @@ public class CraneController : MonoBehaviour
     public Transform boomEndCorner;
     public Rope hookRope;
     public Transform craneRotationPivot;
-    public float rotationSpeed=100f;
+    public float rotationSpeed = 100f;
     public float rotationSmoothness = 5f;
+
+    public GameObject dangerPanel;
+    private bool isDangerPanelOpen = false;
 
     void Start()
     {
         //rope = FindAnyObjectByType<Rope>();
+    }
+
+    void FixedUpdate()
+    {
+        if (isDangerPanelOpen)
+        {
+            
+        }
     }
 
     public void MoveHookY(float input)
@@ -28,6 +39,8 @@ public class CraneController : MonoBehaviour
             Debug.LogWarning("Hook reference is missing!");
             return;
         }
+
+        DangerPanelCheck(input);
 
         float delta = input * hookSpeed * Time.deltaTime;
         hookRope.maxLength += delta;
@@ -43,6 +56,8 @@ public class CraneController : MonoBehaviour
             Debug.Log("Car could not found!");
             return;
         }
+
+        DangerPanelCheck(input);
 
         float delta = -input * carSpeed * Time.deltaTime;
         Vector3 localPos = car.localPosition;
@@ -70,8 +85,23 @@ public class CraneController : MonoBehaviour
 
         float currentInput = 0f;
 
+        DangerPanelCheck(input);
+
         currentInput = Mathf.Lerp(currentInput, input, Time.deltaTime * rotationSmoothness);
         float rotationAmount = currentInput * rotationSpeed * Time.deltaTime;
         craneRotationPivot.Rotate(0f, rotationAmount, 0f);
+    }
+
+    private void DangerPanelCheck(float input)
+    {
+        if (Mathf.Abs(input) >= 0.8 && !isDangerPanelOpen)
+        {
+            dangerPanel.SetActive(true);
+            isDangerPanelOpen = true;
+        }
+        else if (Mathf.Abs(input) <= 0.8 && isDangerPanelOpen)
+        {
+            isDangerPanelOpen = false;
+        }
     }
 }

@@ -27,6 +27,9 @@ public class LevelManager : MonoBehaviour
     public float fourStar;
     public float fiveStar;
 
+    [Header("Star UI")]
+    public GameObject[] stars;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -44,6 +47,8 @@ public class LevelManager : MonoBehaviour
 
         elapsedTime += Time.deltaTime;
         UpdateTimerUI();
+
+        
     }
 
     public void NotifyTargetFilled(TargetArea area)
@@ -96,19 +101,29 @@ public class LevelManager : MonoBehaviour
 
         levelEnded = true;
 
-        int stars = CalculateStars(elapsedTime);
+        int starCount = CalculateStars(elapsedTime);
+        ShowStars(starCount);
 
         Debug.Log($"Level complete in {elapsedTime:F1} seconds. Stars: {stars}");
 
         resultsText.gameObject.transform.parent.gameObject.SetActive(true);
 
         if (resultsText != null)
-            resultsText.text = new string('★', stars) + "\nLevel Completed!\n" + $"{minutes:00}:{seconds:00}";
+            resultsText.text = "Level Completed!\n" + $"{minutes:00}:{seconds:00}";
 
         StartCoroutine(LoadNextSceneAfterDelay(5f));
 
         //SceneManager.LoadScene(NextScene);
     }
+
+    private void ShowStars(int count)
+    {
+        for (int i = 0; i < stars.Length; i++)
+        {
+            stars[i].SetActive(i < count);
+        }
+    }
+
 
     private IEnumerator LoadNextSceneAfterDelay(float delay)
     {
