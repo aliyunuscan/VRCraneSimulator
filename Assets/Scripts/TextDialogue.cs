@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
-    public TextMeshProUGUI dialogueText; // Assign in inspector
-    public Button continueButton;        // Assign in inspector
+    public TextMeshProUGUI dialogueText;
+    public Button continueButton;        
 
     [TextArea(2, 5)]
     public string[] dialogueLines;
@@ -26,7 +26,7 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
-            dialogueText.text = ""; // End of dialogue
+            dialogueText.text = "";
             continueButton.gameObject.SetActive(false);
             gameObject.SetActive(false);
         }

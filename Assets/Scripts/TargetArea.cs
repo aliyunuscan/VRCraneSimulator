@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class TargetArea : MonoBehaviour
 {
-    public string requiredColor; // e.g., "Red", "Blue", "Green"
+    public string requiredColor;
     public float countdownTime = 2f;
 
     private Coroutine countdownRoutine;
@@ -47,6 +47,6 @@ public class TargetArea : MonoBehaviour
             yield return null;
         }
 
-        TargetManager.Instance.NotifyTargetFilled(this);
+        LevelManager.Instance.NotifyTargetFilled(this);
     }
 }
