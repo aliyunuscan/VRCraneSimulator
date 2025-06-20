@@ -19,18 +19,7 @@ public class CraneController : MonoBehaviour
     public GameObject dangerPanel;
     private bool isDangerPanelOpen = false;
 
-    void Start()
-    {
-        //rope = FindAnyObjectByType<Rope>();
-    }
-
-    void FixedUpdate()
-    {
-        if (isDangerPanelOpen)
-        {
-            
-        }
-    }
+    public AudioClip DangerPanelAudioClip;
 
     public void MoveHookY(float input)
     {
@@ -70,7 +59,6 @@ public class CraneController : MonoBehaviour
         car.localPosition = new Vector3(newX, localPos.y, localPos.z);
 
         Vector3 targetHookPos = new Vector3(car.localPosition.x, hook.localPosition.y, hook.localPosition.z);
-        //hook.localPosition = Vector3.Lerp(hook.localPosition, targetHookPos, hookFollowSpeed * Time.deltaTime);
 
         Debug.Log($"Moving car: Input={input} Delta={delta} NewX={newX}");
     }
@@ -94,14 +82,15 @@ public class CraneController : MonoBehaviour
 
     private void DangerPanelCheck(float input)
     {
-        if (Mathf.Abs(input) >= 0.8 && !isDangerPanelOpen)
+        bool shouldShow = Mathf.Abs(input) >= 0.8f;
+        if (shouldShow != isDangerPanelOpen)
         {
-            dangerPanel.SetActive(true);
-            isDangerPanelOpen = true;
-        }
-        else if (Mathf.Abs(input) <= 0.8 && isDangerPanelOpen)
-        {
-            isDangerPanelOpen = false;
+            AudioManagerVR.Instance.PlaySFX2D(DangerPanelAudioClip);
+            dangerPanel.SetActive(shouldShow);
+            isDangerPanelOpen = shouldShow;
         }
     }
+
+
+
 }

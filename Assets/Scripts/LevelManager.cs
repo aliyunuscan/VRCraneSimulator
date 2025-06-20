@@ -30,6 +30,10 @@ public class LevelManager : MonoBehaviour
     [Header("Star UI")]
     public GameObject[] stars;
 
+    [Header("Audio")]
+    public AudioClip LevelCompleteAudioClip;
+    public AudioClip PlacedAudioClip;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -58,12 +62,20 @@ public class LevelManager : MonoBehaviour
 
         areaCompleted[index] = true;
 
+        AudioManagerVR.Instance.PlaySFX2D(PlacedAudioClip);
+
         Debug.Log($"Target {index} filled!");
 
         UpdateContainerCounterUI();
 
-        if (AllTargetsCompleted())
+        if (AllTargetsCompleted()) {
+            AudioManagerVR.Instance.PlaySFX2D(LevelCompleteAudioClip);
             EndLevel();
+        }
+        else
+        {
+            AudioManagerVR.Instance.PlaySFX2D(PlacedAudioClip);
+        }
     }
 
     public void UpdateContainerCounterUI()
@@ -107,6 +119,8 @@ public class LevelManager : MonoBehaviour
         Debug.Log($"Level complete in {elapsedTime:F1} seconds. Stars: {stars}");
 
         resultsText.gameObject.transform.parent.gameObject.SetActive(true);
+
+        
 
         if (resultsText != null)
             resultsText.text = "Level Completed!\n" + $"{minutes:00}:{seconds:00}";

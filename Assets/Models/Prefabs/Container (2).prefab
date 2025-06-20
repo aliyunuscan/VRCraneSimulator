@@ -1092,6 +1092,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   containerColor: Green
+  hitSounds:
+  - {fileID: 8300000, guid: d2ceea17c0d3ff04688740ec708333d5, type: 3}
+  - {fileID: 8300000, guid: 10bef675160b53442a47c4f0b6f4dcaf, type: 3}
+  - {fileID: 8300000, guid: 3252d96e0102c0a4b9d578ef9eedcedb, type: 3}
+  - {fileID: 8300000, guid: b5d040a80ae671a45a6f43959fde0d8c, type: 3}
+  - {fileID: 8300000, guid: 5fa7cbb900d46b64791fe27bd034af33, type: 3}
+  - {fileID: 8300000, guid: 30380159f55f82445886181cda0ac97a, type: 3}
+  - {fileID: 8300000, guid: 626594332646c4f4bae4636f256c8971, type: 3}
+  - {fileID: 8300000, guid: fb96a400d11c75748929fb6d03187d50, type: 3}
+  - {fileID: 8300000, guid: bbd84b788530ad044ab4983886f4bf74, type: 3}
+  - {fileID: 8300000, guid: 2338f363dd8d3054f9a074f21c7a94f0, type: 3}
 --- !u!54 &2501974396927189387
 Rigidbody:
   m_ObjectHideFlags: 0

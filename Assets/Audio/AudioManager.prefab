@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5642257649834655528
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3106044123995300863}
+  - component: {fileID: 4584652536576949077}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3106044123995300863
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5642257649834655528}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.3975363, y: -1.2295034, z: -0.07962339}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4584652536576949077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5642257649834655528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e9945c88eabd6e4ab2c93cbe276c346, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: b523da745675f234f97342cd9fc3f0b9, type: 2}
+  masterGroup: {fileID: 24300002, guid: b523da745675f234f97342cd9fc3f0b9, type: 2}
+  musicGroup: {fileID: 221242135552094037, guid: b523da745675f234f97342cd9fc3f0b9, type: 2}
+  sfxGroup: {fileID: -427058300958027573, guid: b523da745675f234f97342cd9fc3f0b9, type: 2}
+  musicSourcePrefab: {fileID: 1545077307423462637, guid: 4cbbbdea5c2f3e64c9c1f53b0a440c97, type: 3}
+  sfxSourcePrefab: {fileID: 6830266952458630632, guid: a95cae48d3a744f47ae19b4e24821a0e, type: 3}
+  sfxPoolSize: 10
+  musicClip: {fileID: 8300000, guid: 714cebe26c6819347beb80e3e4303d95, type: 3}
