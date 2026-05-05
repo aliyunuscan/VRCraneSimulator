@@ -46,4 +46,3 @@ This project transcends basic gameplay by acting as a professional training tool
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-```
