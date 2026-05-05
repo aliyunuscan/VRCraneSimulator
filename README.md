@@ -32,7 +32,7 @@ The simulator immerses users in a realistic, risk-free industrial environment, a
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone [https://github.com/yourusername/vr-crane-simulator.git](https://github.com/yourusername/vr-crane-simulator.git)
+   git clone [https://github.com/aliyunuscan/VRCraneSimulator.git](https://github.com/aliyunuscan/VRCraneSimulator.git)
    ```
 2. Open the project in the **Unity Hub** using **Unity 6**.
 3. Ensure **XR Plug-in Management** is configured for your device in Project Settings.
