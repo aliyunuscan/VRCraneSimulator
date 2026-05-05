@@ -1,19 +1,21 @@
 # VR Crane Simulator: Occupational Health & Safety Training
 
-A high-fidelity Virtual Reality simulation designed to provide foundational crane operation experience with a strict focus on Occupational Health and Safety (OHS). Developed during my tenure as an Application and Simulation Developer Intern, this project aims to bridge the gap between theoretical safety protocols and practical application.
+A physics-driven Virtual Reality prototype designed to provide foundational crane operation experience, focusing on Occupational Health and Safety (OHS). Developed during my tenure as an Application and Simulation Developer Intern, this project prioritizes core mechanics and rapid prototyping to demonstrate practical safety concepts.
 
 ## 📋 Project Overview
 
-The simulator immerses users in a realistic, risk-free industrial environment, allowing aspiring operators to develop essential skills in load management and spatial awareness. The project is specifically engineered to test hazard prevention and precision handling without the real-world risks or equipment costs associated with heavy machinery.
+The simulator places users in a risk-free virtual industrial environment, allowing them to practice basic load management and spatial awareness. To ensure a rapid development cycle and focus primarily on VR interactions, the project utilizes pre-made 3D visual assets. Therefore, rather than focusing on high-fidelity visual realism, the "realistic" aspect of this simulation is heavily dependent on utilizing the physics engine to test hazard prevention and basic mechanical handling.
+
+🎮 **[Click here to visit the Game Page!]**(https://sidequestvr.com/app/43243/vr-tower-crane-simulator)
 
 ## ✨ Key Features
 
-- **Progressive Level Design:** Multiple distinct levels, ranging from basic control familiarization to complex, obstacle-rich logistical tasks.
+- **Physics-Based Mechanics:** While not visually photorealistic, the simulation leverages the physics engine to simulate cable tension, load sway, and mechanical momentum to replicate operational challenges.
+- **Rapid Prototyping Approach:** Built using ready-made visual assets, allowing the development focus to remain strictly on C# scripting, VR interactions, and the evaluation engine.
 - **Dynamic Scoring & Evaluation Engine:** A real-time assessment system that grades performance based on:
-  - **Safety Penalties:** Deducts points for critical errors, load collisions, sudden movements, or violations of OHS protocols.
-  - **Operational Efficiency:** Rewards smooth movements and optimal completion times (Speed vs. Accuracy).
-- **Universal VR Compatibility:** Primarily developed and optimized for **Oculus (Meta Quest)** using **Unity 6**, yet fully compatible with all major VR platforms via the XR Interaction Toolkit.
-- **Realistic Physics:** Advanced simulation of cable tension, load sway, and mechanical momentum to replicate real-world challenges.
+  - **Safety Penalties:** Deducts points for critical errors, load collisions, sudden movements, or violations of basic OHS protocols.
+  - **Operational Efficiency:** Rewards smooth handling and optimal completion times.
+- **Universal VR Compatibility:** Primarily developed for **Oculus (Meta Quest)** using **Unity 6**, yet compatible with major VR platforms via the XR Interaction Toolkit.
 
 ## 🛠 Technical Stack
 
