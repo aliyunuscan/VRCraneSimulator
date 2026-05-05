@@ -6,7 +6,7 @@ A physics-driven Virtual Reality prototype designed to provide foundational cran
 
 The simulator places users in a risk-free virtual industrial environment, allowing them to practice basic load management and spatial awareness. To ensure a rapid development cycle and focus primarily on VR interactions, the project utilizes pre-made 3D visual assets. Therefore, rather than focusing on high-fidelity visual realism, the "realistic" aspect of this simulation is heavily dependent on utilizing the physics engine to test hazard prevention and basic mechanical handling.
 
-🎮 **[Click here to visit the Game Page!]**(https://sidequestvr.com/app/43243/vr-tower-crane-simulator)
+🎮 **Click here to visit the Game Page!:** https://sidequestvr.com/app/43243/vr-tower-crane-simulator
 
 ## ✨ Key Features
 
